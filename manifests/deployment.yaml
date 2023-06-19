@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pykube_app
+  name: pykube-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: pykube_app
+      app: pykube-app
   template:
     metadata:
       labels:
-        app: pykube_app
+        app: pykube-app
     spec:
       containers:
-        - name: pykube_app
+        - name: pykube-app
           image: dejain4/pykube:latest
           ports:
             - containerPort: 5000
