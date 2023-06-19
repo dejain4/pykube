@@ -24,4 +24,4 @@ COPY /pykube .
 EXPOSE 5000
 
 # Start the Flask application with gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "app:pykube"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "pykube:app"]
