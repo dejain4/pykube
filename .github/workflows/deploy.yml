@@ -1,11 +1,8 @@
-name: Deploy to DigitalOcean Kubernetes
+name: Deploy To Kubernetes
 
 on:
   release:
     types: [created]
-
-env:
-  KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
   deploy:
@@ -18,16 +15,9 @@ jobs:
       - name: Set up kubectl
         uses: azure/k8s-set-context@v1
         with:
-          kubeconfig: ${{ env.KUBECONFIG }}
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl create secret docker-registry dockerhub-credentials \
-            --docker-server=https://docker.io \
-            --docker-username=${{ secrets.DOCKER_HUB_USERNAME }} \
-            --docker-password=${{ secrets.DOCKER_HUB_TOKEN }} \
-            --docker-email=${{ secrets.DOCKER_HUB_EMAIL }} \
-            --dry-run=client -o yaml | kubectl apply -f -
           kubectl apply -f ./manifests/deployment.yaml
           kubectl apply -f ./manifests/service.yaml
-          
