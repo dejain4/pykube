@@ -1,5 +1,5 @@
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from os import getenv
 
 import redis
@@ -28,8 +28,6 @@ def health():
 
 @app.route("/redis-hits")
 def redis_hits():
-    if not is_ready():
-        return "Not ready", 404
     if "redis" not in context:
         # Create a Redis connection
         context["redis"] = redis.Redis(
@@ -41,7 +39,7 @@ def redis_hits():
         try:
             # Increment and return the number of hits in Redis cache
             return "Redis hits " + str(cache.incr("hits"))
-        except redis.exceptions.ConnectionError as exc:
+        except redis.exceptions.ConnectionError:
             if retries == 0:
                 return "No response from Redis"
             retries -= 1
