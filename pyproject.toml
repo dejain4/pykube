@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pykube"
 version = "0.1.0"
-description = "Python Flask application on Kubernetes. It includes all the necessary files and configurations to automate the deployment process using GitHub Actions."
+description = "Python Flask application on Kubernetes. It includes all the necessary files and configurations to automate the deployment process using GitHub Actions.."
 authors = ["Deepika <dejain4@gmail.com>"]
 readme = "README.md"
 packages = [{include = "pykube"}]
